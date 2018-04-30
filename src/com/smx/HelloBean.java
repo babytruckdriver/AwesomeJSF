@@ -2,9 +2,11 @@ package com.smx;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -14,8 +16,17 @@ public class HelloBean implements Serializable {
 
     private String name = "Sira";
     private int numero;
+    private int resultado;
+   
+
     @ManagedProperty(value = "#{operar}")
     private Operar operar;
+    
+    @PostConstruct // Código que se ejecuta tras la creación del Bean
+    public void init() {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---Do initialization");
+        this.numero = 1;
+    }
 
     public int getNumero() {
         return numero;
@@ -28,6 +39,10 @@ public class HelloBean implements Serializable {
     public String getName() {
         return "Samuel";
     }
+    
+    public int getResultado() {
+        return resultado;
+    }
 
     /**
      * Este método posibilita el debugeo desde la vista
@@ -39,7 +54,14 @@ public class HelloBean implements Serializable {
 
     public void operarAction() {
         this.numero = operar.doblar(this.numero);
+        this.resultado = this.numero;
+        System.out.println(">> Ejecutada operación 'operarAction'.");
     }
+    
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/hello.xhtml?faces-redirect=true";
+    }    
 
     public void setOperar(Operar operar) {
         this.operar = operar;

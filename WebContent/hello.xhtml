@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>JSF 2.0 Hello World</title>
@@ -18,7 +19,16 @@
 
 	<h:form>
 		<h:inputText id="inputNumero" value="#{helloBean.numero}"></h:inputText>
-		<h:commandButton id="cbOperar" action="#{helloBean.operarAction}" value="Duplicar"></h:commandButton>
+		<h:commandButton id="cbOperar" action="#{helloBean.operarAction}"
+			value="Duplicar"></h:commandButton>
+		<h:message id="numeroMsg" for="inputNumero"></h:message>
+		<hr />
+		<h:panelGroup layout="block" id="divResultado" rendered="#{helloBean.resultado gt 0}">
+			Resultado: #{helloBean.resultado}
+		</h:panelGroup>
+		<hr />
+		<h:commandButton id="cbCerrarSesion" action="#{helloBean.logout}"
+			value="Logout"></h:commandButton>
 	</h:form>
 
 </h:body>
