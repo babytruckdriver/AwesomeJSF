@@ -53,7 +53,6 @@ public class HelloBean implements Serializable {
     }
 
     public void operarAction() {
-        this.numero = operar.doblar(this.numero);
         this.resultado = this.numero;
         System.out.println(">> Ejecutada operación 'operarAction'.");
     }
