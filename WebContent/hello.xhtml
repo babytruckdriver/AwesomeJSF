@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF 2.0 Hello World</title>
+</h:head>
+<h:body bgcolor="white">
+	<h2>JSF 2.2</h2>
+	<h2>Bienvenido #{helloBean.name}</h2>
+
+	<ui:remove>Pulsando Ctrl Shift x, se abre una vista con información de debuggs</ui:remove>
+	<ui:debug hotkey="x"
+		rendered="#{facesContext.application.projectStage == 'Development'}" />
+
+	<h:form>
+		<h:inputText id="inputNumero" value="#{helloBean.numero}"></h:inputText>
+		<h:commandButton id="cbOperar" action="#{helloBean.operarAction}" value="Duplicar"></h:commandButton>
+	</h:form>
+
+</h:body>
+</html>
