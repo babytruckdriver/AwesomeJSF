@@ -70,6 +70,11 @@ public class HelloBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
     }    
+    
+    public String navegar() {
+        System.out.println("Navegando..");
+        return "foo";
+    }
 
     public void setOperar(Operar operar) {
         this.operar = operar;
