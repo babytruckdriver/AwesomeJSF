@@ -19,7 +19,6 @@ public class HelloBean implements Serializable {
     private String name = "Sira";
     private int numero;
     private int resultado;
-   
 
     @ManagedProperty(value = "#{operar}")
     private Operar operar;
@@ -49,13 +48,10 @@ public class HelloBean implements Serializable {
     /**
      * Este método posibilita el debugeo desde la vista
      */
-    @Override
-    public String toString() {
-        return "HelloBean [name=" + name + "]";
-    }
+
 
     public void operarAction() {
-        this.resultado = this.numero;
+        this.resultado = this.operar.doblar(this.numero);
         System.out.println(">> Ejecutada operación 'operarAction'.");
         
         // Se comprueba el entorno en el que estamos para enviar información extra de debug
@@ -64,9 +60,15 @@ public class HelloBean implements Serializable {
         }
     }
     
+    @Override
+    public String toString() {
+        return "HelloBean [name=" + name + ", numero=" + numero + ", resultado=" + resultado + ", operar=" + operar
+                + "]";
+    }
+
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/hello.xhtml?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }    
 
     public void setOperar(Operar operar) {

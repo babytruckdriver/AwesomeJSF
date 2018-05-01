@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 
@@ -19,7 +19,10 @@
 		rendered="#{facesContext.application.projectStage == 'Development'}" />
 
 	<h:form id="mainForm">
-		<h:inputText id="inputNumero" value="#{helloBean.numero}"></h:inputText>
+		<h:inputText id="inputNumero" value="#{helloBean.numero}">
+			<f:validator validatorId="validadores.menor3"/>
+			<f:validateLength minimum="5" maximum="10" />
+		</h:inputText>
 		<h:commandButton id="cbOperar" action="#{helloBean.operarAction}"
 			value="Duplicar">
 			<f:ajax execute="mainForm" render="contenedor"></f:ajax>
@@ -30,10 +33,12 @@
 			<h:panelGroup layout="block" id="divResultado" rendered="#{helloBean.resultado gt 0}">
 				Resultado: #{helloBean.resultado}
 			</h:panelGroup>
+			<h:messages id="mensajesError">
+				Errores globlales: 
+			</h:messages>
 		</h:panelGroup>
 		<hr />
-		<h:commandButton id="cbCerrarSesion" action="#{helloBean.logout}"
-			value="Logout"></h:commandButton>
+		<h:commandButton id="cbCerrarSesion" action="#{helloBean.logout}" value="Logout"></h:commandButton>
 	</h:form>
 
 </h:body>
