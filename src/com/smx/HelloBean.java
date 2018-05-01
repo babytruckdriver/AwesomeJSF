@@ -3,10 +3,12 @@ package com.smx;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.ProjectStage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
 
 @ManagedBean
 @SessionScoped
@@ -24,7 +26,7 @@ public class HelloBean implements Serializable {
     
     @PostConstruct // Código que se ejecuta tras la creación del Bean
     public void init() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---Do initialization");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--- Inicializando HelloBean");
         this.numero = 1;
     }
 
@@ -55,6 +57,11 @@ public class HelloBean implements Serializable {
     public void operarAction() {
         this.resultado = this.numero;
         System.out.println(">> Ejecutada operación 'operarAction'.");
+        
+        // Se comprueba el entorno en el que estamos para enviar información extra de debug
+        if(ProjectStage.Development == FacesContext.getCurrentInstance().getApplication().getProjectStage()) {
+            System.out.println(">> Entorno de ejecución 'Development'. Información extra.");
+        }
     }
     
     public String logout() {
